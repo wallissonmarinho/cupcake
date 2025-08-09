@@ -2,7 +2,11 @@ module github.com/wallissonmarinho/cupcake
 
 go 1.24.5
 
-require github.com/spf13/viper v1.20.1
+require (
+	github.com/google/uuid v1.6.0
+	github.com/spf13/viper v1.20.1
+	golang.org/x/crypto v0.32.0
+)
 
 require github.com/go-logfmt/logfmt v0.5.1 // indirect
 

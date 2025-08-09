@@ -1,7 +1,8 @@
 package service
 
 import (
-	"github.com/go-kit/log"
+	"log"
+
 	"github.com/jmoiron/sqlx"
 	auth "github.com/wallissonmarinho/cupcake/internal/service/auth"
 	cart "github.com/wallissonmarinho/cupcake/internal/service/cart"
@@ -32,7 +33,7 @@ type serviceFactory struct {
 	profileService   profile.ProfileService
 }
 
-func NewServiceFactory(db *sqlx.DB, logger log.Logger) ServiceFactory {
+func NewServiceFactory(db *sqlx.DB, logger *log.Logger) ServiceFactory {
 	return &serviceFactory{
 		authService:      auth.NewAuthService(logger, db),
 		cartService:      cart.NewCartService(logger, db),

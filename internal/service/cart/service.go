@@ -1,17 +1,18 @@
 package cart
 
 import (
-	"github.com/go-kit/log"
+	"log"
+
 	"github.com/jmoiron/sqlx"
 )
 
 type CartService interface{}
 
 type cartService struct {
-	logger log.Logger
+	logger *log.Logger
 }
 
-func NewCartService(logger log.Logger, db *sqlx.DB) CartService {
+func NewCartService(logger *log.Logger, db *sqlx.DB) CartService {
 	return &cartService{
 		logger: logger,
 	}
