@@ -1,7 +1,7 @@
 package profile
 
 import (
-	"log"
+	"github.com/go-kit/log"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -9,10 +9,10 @@ import (
 type ProfileService interface{}
 
 type profileService struct {
-	logger *log.Logger
+	logger log.Logger
 }
 
-func NewProfileService(logger *log.Logger, db *sqlx.DB) ProfileService {
+func NewProfileService(logger log.Logger, db *sqlx.DB) ProfileService {
 	return &profileService{
 		logger: logger,
 	}

@@ -1,7 +1,7 @@
 package product
 
 import (
-	"log"
+	"github.com/go-kit/log"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -9,10 +9,10 @@ import (
 type ProductService interface{}
 
 type productService struct {
-	logger *log.Logger
+	logger log.Logger
 }
 
-func NewProductService(logger *log.Logger, db *sqlx.DB) ProductService {
+func NewProductService(logger log.Logger, db *sqlx.DB) ProductService {
 	return &productService{
 		logger: logger,
 	}

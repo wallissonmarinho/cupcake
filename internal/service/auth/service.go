@@ -2,7 +2,8 @@ package auth
 
 import (
 	"context"
-	"log"
+
+	"github.com/go-kit/log"
 
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
@@ -20,10 +21,10 @@ type AuthService interface {
 type authService struct {
 	userRepository    user.UserRepository
 	profileRepository profile.ProfileRepository
-	logger            *log.Logger
+	logger            log.Logger
 }
 
-func NewAuthService(logger *log.Logger, db *sqlx.DB) AuthService {
+func NewAuthService(logger log.Logger, db *sqlx.DB) AuthService {
 	return &authService{
 		userRepository:    user.NewUserRepository(db),
 		profileRepository: profile.NewProfileRepository(db),
@@ -38,24 +39,24 @@ func (s *authService) Register(ctx context.Context, req domain.UserProfileReques
 
 	hashedPassword, err := util.HashPassword(req.User.Password)
 	if err != nil {
-		s.logger.Printf("error: failed to hash password: %v", err)
+		util.Error(s.logger, "failed to hash password", err)
 		return err
 	}
 	req.User.Password = hashedPassword
 
 	err = s.userRepository.CreateUser(req.User)
 	if err != nil {
-		s.logger.Printf("error: failed to create user: %v", err)
+		util.Error(s.logger, "failed to create user", err)
 		return err
 	}
 
 	err = s.profileRepository.CreateProfile(req)
 	if err != nil {
-		s.logger.Printf("error: failed to create profile: %v", err)
+		util.Error(s.logger, "failed to create profile", err)
 		return err
 	}
 
-	s.logger.Printf("info: user and profile created successfully")
+	util.Info(s.logger, "user and profile created successfully")
 	return nil
 }
 

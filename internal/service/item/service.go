@@ -1,7 +1,7 @@
 package item
 
 import (
-	"log"
+	"github.com/go-kit/log"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -9,10 +9,10 @@ import (
 type ItemService interface{}
 
 type itemService struct {
-	logger *log.Logger
+	logger log.Logger
 }
 
-func NewItemService(logger *log.Logger, db *sqlx.DB) ItemService {
+func NewItemService(logger log.Logger, db *sqlx.DB) ItemService {
 	return &itemService{
 		logger: logger,
 	}

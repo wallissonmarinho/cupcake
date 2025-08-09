@@ -1,7 +1,7 @@
 package order
 
 import (
-	"log"
+	"github.com/go-kit/log"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -9,10 +9,10 @@ import (
 type OrderService interface{}
 
 type orderService struct {
-	logger *log.Logger
+	logger log.Logger
 }
 
-func NewOrderService(logger *log.Logger, db *sqlx.DB) OrderService {
+func NewOrderService(logger log.Logger, db *sqlx.DB) OrderService {
 	return &orderService{
 		logger: logger,
 	}
